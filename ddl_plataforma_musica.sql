@@ -1,0 +1,3 @@
+DROP DATABASE IF EXISTS spotify;
+CREATE DATABASE spotify;
+USE spotify;
