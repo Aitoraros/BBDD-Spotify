@@ -78,21 +78,28 @@ INSERT INTO artistas (nombre, genero_principal, nacionalidad, biografia) VALUES
 ('Río Salvaje', 'Rock', 'Argentina', 'Banda de rock alternativo formada en 2015.'),
 ('Neon Pulse', 'Electrónica', 'Alemania', 'Productor de música electrónica y techno.'),
 ('Kaito', 'Hip Hop', 'Japón', 'Rapero urbano con letras introspectivas.'),
-('Sol Andino', 'Folk', 'Perú', 'Proyecto musical inspirado en sonidos andinos.');
+('Sol Andino', 'Folk', 'Perú', 'Proyecto musical inspirado en sonidos andinos.'),
+('The Midnight', 'Indie', 'USA', 'Banda de synthwave e indie rock.'),
+('Bizarrap', 'Trap', 'Argentina', 'Productor líder de la escena urbana.'),
+('Rosalía', 'Latino', 'España', 'Innovadora del flamenco y pop urbano.'),
+('Daft Punk', 'Electrónica', 'Francia', 'Dúo icónico de música house y disco.'),
+('Arctic Monkeys', 'Rock', 'UK', 'Referente del indie rock británico.');
+
 INSERT INTO albumes (titulo, fecha_lanzamiento, genero, num_canciones, id_artista) VALUES
 ('Ciclos', '2021-05-10', 'Pop', 10, 1),
 ('Horizonte', '2023-02-18', 'Pop', 8, 1),
+('Galaxia', '2024-01-01', 'Pop', 12, 1), 
 ('Fuego Interior', '2020-09-12', 'Rock', 12, 2),
 ('Rutas', '2022-06-01', 'Rock', 9, 2),
 ('Neon Dreams', '2019-11-22', 'Electrónica', 11, 3),
-('Night Drive', '2024-01-15', 'Electrónica', 10, 3),
 ('Reflejos', '2021-03-30', 'Hip Hop', 8, 4),
 ('Tokyo Streets', '2023-08-20', 'Hip Hop', 10, 4),
-('Raíces', '2018-07-07', 'Folk', 9, 5),
-('Montaña Viva', '2022-04-14', 'Folk', 7, 5),
-('Silent Waves', '2020-10-01', 'Indie', 11, 6),
-('Last Light', '2023-12-05', 'Indie', 9, 6),
-('Solar Nights', '2019-06-18', 'House', 10, 7);
+('Motomami', '2022-03-18', 'Latino', 16, 8),
+('El Mal Querer', '2018-11-02', 'Latino', 11, 8),
+('AM', '2013-09-09', 'Rock', 12, 10),
+('Discovery', '2001-03-12', 'Electrónica', 14, 9),
+('Homework', '1997-01-20', 'Electrónica', 16, 9),
+('Random Access Memories', '2013-05-17', 'Electrónica', 13, 9);
 INSERT INTO canciones (titulo, duracion, reproducciones, genero, id_artista) VALUES
 ('Latidos', 210, 1500000, 'Pop', 1),
 ('Eclipse', 195, 900000, 'Pop', 1),
@@ -113,7 +120,14 @@ INSERT INTO canciones (titulo, duracion, reproducciones, genero, id_artista) VAL
 ('Street Life', 205, 1300000, 'Trap', 9),
 ('Fast Lane', 215, 1400000, 'Trap', 9),
 ('Frozen Air', 400, 300000, 'Ambient', 10),
-('Soft Glow', 420, 280000, 'Ambient', 10);
+('Soft Glow', 420, 280000, 'Ambient', 10),
+('Candy', 193, 2000000, 'Latino', 8),
+('One More Time', 320, 9000000, 'Electrónica', 9),
+('Instant Crush', 337, 7500000, 'Electrónica', 9),
+('Do I Wanna Know?', 272, 8200000, 'Rock', 10),
+('R U Mine?', 201, 6000000, 'Rock', 10),
+('Senderos', 240, 200000, 'Folk', 5);
+
 INSERT INTO usuarios (nombre, email, tipo_sub, fecha_registro) VALUES
 ('ana23', 'ana@gmail.com', 'Premium', '2023-01-10 12:30:00'),
 ('carlos_music', 'carlos@gmail.com', 'Gratis', '2022-06-18 09:15:00'),
