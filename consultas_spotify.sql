@@ -1,4 +1,3 @@
--- Active: 1763398454688@@127.0.0.1@3306@spotify
 -- Consulta 1 --
 -- Mostrar el título de cada canción junto con el nombre del artista que la ha creado y las reproducciones totales. 
 -- Se ordena por el número de reproducciones de forma descendente.
