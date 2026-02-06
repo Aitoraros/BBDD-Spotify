@@ -1,4 +1,4 @@
--- Active: 1763398402893@@127.0.0.1@3306@spotify
+
 DROP DATABASE IF EXISTS spotify;
 CREATE DATABASE spotify;
 USE spotify;
