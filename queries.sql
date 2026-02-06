@@ -36,10 +36,10 @@ HAVING total_canciones > 1;
 
 -- Consulta 6 --
 -- Nombre de los artistas que tengan al menos 3 álbumes registrados
-SELECT `nombre` FROM artistas
-WHERE `id_artista` IN (
-    SELECT `id_artista` FROM albumes
-    GROUP BY `id_artista`
+SELECT nombre FROM artistas
+WHERE id_artista IN (
+    SELECT id_artista FROM albumes
+    GROUP BY id_artista
     HAVING COUNT(*) >= 3
 );
 
@@ -52,7 +52,7 @@ WHERE id_usuario IN (
         SELECT id_playlist FROM agrega
         WHERE id_cancion IN (
             SELECT id_cancion FROM canciones
-            WHERE titulo LIKE 'Latidos'
+            WHERE titulo LIKE Latidos
         )
     )
 );
