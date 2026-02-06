@@ -56,22 +56,3 @@ WHERE id_usuario IN (
         )
     )
 );
-
-
-
--- Consulta 8 --
--- Listar las canciones que forman parte de alguna playlist, mostrando el nombre de la playlist
--- y el título de la canción, ordenadas por el orden de reproducción.
-
-
-
--- Consulta 9 --
--- Mostrar los nombres de los usuarios que han creado al menos una playlist. --
-
-
-
--- Consulta 10 --
--- Obtener el artista cuya suma total de reproducciones de todas sus canciones sea la más alta de la plataforma. --
-
-
-
