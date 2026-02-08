@@ -1,3 +1,4 @@
+-- Active: 1763398402893@@127.0.0.1@3306@spotify
 -- Consulta 1 --
 -- Mostrar el título de cada canción junto con el nombre del artista que la ha creado y las reproducciones totales. 
 -- Se ordena por el número de reproducciones de forma descendente.
@@ -55,4 +56,33 @@ WHERE id_usuario IN (
             WHERE titulo LIKE Latidos
         )
     )
+);
+
+-- Consulta 8 --
+-- Mostrar el promedio de reproducciones de las canciones de cada artista.
+-- Nota: Como en tu BD las canciones cuelgan del artista y no del álbum directamente, 
+-- calculamos el éxito promedio por artista.
+SELECT ar.nombre AS artista, ROUND(AVG(c.reproducciones), 2) AS promedio_reproducciones
+FROM artistas ar
+JOIN canciones c ON ar.id_artista = c.id_artista
+GROUP BY ar.nombre;
+
+-- Consulta 9 --
+-- Obtener el título y las reproducciones de la canción o canciones menos escuchadas de la plataforma.
+-- Se utiliza una subconsulta para encontrar el valor mínimo global.
+SELECT titulo, reproducciones
+FROM canciones
+WHERE reproducciones = (
+    SELECT MIN(reproducciones) 
+    FROM canciones
+);
+
+-- Consulta 10 --
+-- Mostrar el nombre del artista y el título de la canción que tiene el récord de reproducciones 
+SELECT a.nombre AS artista, c.titulo AS cancion_top, c.reproducciones
+FROM artistas a
+JOIN canciones c ON a.id_artista = c.id_artista
+WHERE c.reproducciones = (
+    SELECT MAX(reproducciones) 
+    FROM canciones
 );
