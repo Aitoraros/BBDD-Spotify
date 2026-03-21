@@ -31,7 +31,8 @@ CREATE TABLE usuarios (
     nombre VARCHAR(50) NOT NULL UNIQUE,
     email VARCHAR(100) NOT NULL UNIQUE,
     tipo_sub ENUM('Gratis', 'Premium') DEFAULT 'Gratis',
-    fecha_registro DATETIME NOT NULL
+    fecha_registro DATETIME NOT NULL,
+    año_registro INT
 );
 
 -- Tabla playlist. Se almacena el ID autonumérico, nombre, fecha de creación, si es privada y el número de canciones.
