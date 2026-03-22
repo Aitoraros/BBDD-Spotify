@@ -32,10 +32,72 @@ END $$
 
 -- Function 1
 
+/*
+ * Crea una función que reciba el email de un usuario y devuelve el número total
+ * de playlists que ha creado en la plataforma. 
+ * Si el usuario no existe, la función debe cancelar la operación.
+ */
+CREATE FUNCTION contar_playlists(email_usuario VARCHAR(100))
+RETURNS INT
+BEGIN
+    DECLARE total INT;
+    DECLARE v_id_usuario INT;
+
+    -- Obtiene id del usuario
+    SELECT id_usuario INTO v_id_usuario
+    FROM usuarios
+    WHERE email = email_usuario;
+
+    -- Cancela si no existe
+    IF v_id_usuario IS NULL THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Usuario no existe';
+    END IF;
+
+    -- Contador de playlists
+    SELECT COUNT(*) INTO total
+    FROM playlists
+    WHERE id_usuario = v_id_usuario;
+
+    RETURN total;
+END $$
+
+SELECT contar_playlists('david@gmail.com')$$
 
 -- Function 2
 
+/*
+ * Crea una función que reciba el email de un usuario y devuelve el número total
+ * de canciones de sus playlists que tengan más de 3 canciones 
+ * Si el usuario no existe, la función debe cancelar la operación.
+ */
+CREATE FUNCTION canciones_playlists(email_usuario VARCHAR(100))
+RETURNS INT
+BEGIN
+    DECLARE total INT;
+    DECLARE v_id_usuario INT;
 
+    -- Obtiene el id del usuario
+    SELECT id_usuario INTO v_id_usuario
+    FROM usuarios
+    WHERE email = email_usuario;
+
+    -- Cancela si el usuario no existe
+    IF v_id_usuario IS NULL THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Usuario no encontrado';
+    END IF;
+
+    -- Contador de canciones (con condición)
+    SELECT SUM(num_canciones) INTO total
+    FROM playlists
+    WHERE id_usuario = v_id_usuario
+    AND num_canciones > 3;
+
+    RETURN IFNULL(total, 0);
+END $$
+
+SELECT canciones_playlists('david@gmail.com')$$
 -- Procedure 1
 
 
