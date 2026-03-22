@@ -16,6 +16,7 @@ BEGIN
 END $$
 INSERT INTO usuarios (nombre, email, tipo_sub, fecha_registro) VALUES
 ('ana22', 'ana2@gmail.com', 'Premium', '2023-01-10 12:30:00') $$
+SELECT * FROM usuarios $$
 
 -- Trigger 2. Validación de título y duración de una canción.
 CREATE TRIGGER tr_validar_cancion BEFORE INSERT ON canciones
@@ -33,7 +34,7 @@ BEGIN
     END IF;
 END $$
 INSERT INTO canciones (titulo, duracion, reproducciones, genero, id_artista) VALUES
-('a', 0, 1500000, 'Pop', 1) $$
+('abc', 0, 1500000, 'Pop', 1) $$
 
 -- Function 1
 
@@ -103,8 +104,48 @@ BEGIN
 END $$
 
 SELECT canciones_playlists('david@gmail.com')$$
--- Procedure 1
 
+-- Procedure 1. Calcula las stats de los artistas de un género
+CREATE OR REPLACE PROCEDURE reporte_popularidad_genero(IN p_genero VARCHAR(50))
+BEGIN
+    -- variables
+    DECLARE done INT DEFAULT FALSE;
+    DECLARE v_nombre_artista VARCHAR(50);
+    DECLARE v_id_artista INT;
+    DECLARE v_total_reps INT;
+    
+    -- declaracion del cursor, se seleccionan los artistas del genero pasado
+    DECLARE cur_artistas CURSOR FOR 
+        SELECT id_artista, nombre FROM artistas WHERE genero_principal = p_genero;
+    
+    -- declare handler
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+
+    OPEN cur_artistas;
+
+    read_loop: LOOP
+        FETCH cur_artistas INTO v_id_artista, v_nombre_artista;
+        
+        -- si el cursor no tiene más filas salimo del bucle
+        IF done THEN
+            LEAVE read_loop;
+        END IF;
+
+        -- sumas de las repros de las canciones
+        SELECT IFNULL(SUM(reproducciones), 0) 
+        INTO v_total_reps
+        FROM canciones 
+        WHERE id_artista = v_id_artista;
+
+        SELECT v_nombre_artista AS artista, v_total_reps AS total_reproducciones;
+        
+    END LOOP;
+
+    CLOSE cur_artistas;
+END $$
+
+-- Ejemplo de ejecución. Se le pasa rock de género
+CALL reporte_popularidad_genero('Rock')$$
 
 -- Procedure 2
 
