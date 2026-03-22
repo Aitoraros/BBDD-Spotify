@@ -2,7 +2,7 @@
 DELIMITER $$
 
 -- Trigger 1. Cálculo del año de registro en base de la fecha de registro.
-CREATE TRIGGER calculo_año_registro BEFORE INSERT ON usuarios
+CREATE OR REPLACE TRIGGER calculo_año_registro BEFORE INSERT ON usuarios
 FOR EACH ROW 
 BEGIN
     -- Si hay fecha de registro
@@ -14,6 +14,8 @@ BEGIN
         SET NEW.año_registro = YEAR(NOW());
     END IF;
 END $$
+INSERT INTO usuarios (nombre, email, tipo_sub, fecha_registro) VALUES
+('ana22', 'ana2@gmail.com', 'Premium', '2023-01-10 12:30:00') $$
 
 -- Trigger 2. Validación de título y duración de una canción.
 CREATE TRIGGER tr_validar_cancion BEFORE INSERT ON canciones
@@ -30,6 +32,8 @@ BEGIN
         SET MESSAGE_TEXT = 'Error: El título de la canción es demasiado corto.';
     END IF;
 END $$
+INSERT INTO canciones (titulo, duracion, reproducciones, genero, id_artista) VALUES
+('a', 0, 1500000, 'Pop', 1) $$
 
 -- Function 1
 
