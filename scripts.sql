@@ -148,7 +148,52 @@ END $$
 CALL reporte_popularidad_genero('Rock')$$
 
 -- Procedure 2
+/*
+ * Crea un procedimiento que registre un álbum para un artista existente y,
+ * mediante un bucle, inserte automáticamente el número de canciones
+ * indicado en los parámetros, asignándoles un título genérico y
+ * una duración predeterminada.
+ */
+CREATE PROCEDURE registrar_album_con_canciones(
+    IN p_id_artista INT,
+    IN p_titulo_alb VARCHAR(150),
+    IN p_genero VARCHAR(50),
+    IN p_num_canciones INT
+)
+BEGIN
+    -- Declaración de variables
+    DECLARE v_contador INT DEFAULT 1;
+    DECLARE v_id_album INT;
 
+    -- Se inserta el álbum
+    INSERT INTO albumes (titulo, fecha_lanzamiento, genero, num_canciones, id_artista)
+    VALUES (p_titulo_alb, CURDATE(), p_genero, p_num_canciones, p_id_artista);
+    
+    -- Se obtiene el ID del álbum recién creado
+    -- Se busca el ID más alto de la tabla álbumes para este artista
+    SELECT MAX(id_album) INTO v_id_album 
+    FROM albumes 
+    WHERE id_artista = p_id_artista;
+
+    -- Bucle WHILE para insertar las canciones
+    WHILE v_contador <= p_num_canciones DO
+        INSERT INTO canciones (titulo, duracion, genero, id_artista)
+        VALUES (
+            CONCAT('Canción ', v_contador, ' de ', p_titulo_alb), 
+            180, 
+            p_genero, 
+            p_id_artista
+        );
+        
+        -- Incremento de la variable contador
+        SET v_contador = v_contador + 1;
+    END WHILE;
+
+    SELECT CONCAT('Álbum ID ', v_id_album, ' y sus canciones han sido registrados.') AS Resultado;
+END $$
+
+-- Ejemplo de llamada al procedimiento
+CALL registrar_album_con_canciones(1, 'Discovery', 'Electrónica', 14);
 
 
 DELIMITER ;
