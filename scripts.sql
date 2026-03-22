@@ -1,3 +1,4 @@
+-- Active: 1763398402893@@127.0.0.1@3306@spotify
 DELIMITER $$
 
 -- Trigger 1. Cálculo del año de registro en base de la fecha de registro.
